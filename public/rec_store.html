@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <!-- Bootstrap の css をインポートする。参考 https://getbootstrap.jp/docs/4.5/getting-started/introduction/　-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+            
+            <!-- モバイルブラウザでのレイアウトを制御する。参考 https://qiita.com/ryounagaoka/items/045b2808a5ed43f96607 -->
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+                
+                <!-- 検索エンジンに引っかからないようにする。参考 https://ameblo.jp/masa30201/entry-11564231810.html -->
+                <meta name="Keywords" content="norobot">
+                    
+                    <!--  -->
+                    <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+                    <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+                    <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+                    <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+                    
+                    <script defer src="/__/firebase/init.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
+                    <script src="/config.js"></script>
+                    <script src="/lunch_room.js"></script>
+
+                    <!-- jQuery, Bootstrap の JSライブラリ をロードする。参考 https://getbootstrap.jp/docs/4.5/getting-started/introduction/ -->
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+                    
+                    <!-- android のブラウザを全画面表示にさせる -->
+                    <meta name="mobile-web-app-capable" content="yes">
+                        
+                        <!-- iOS のブラウザを全画面表示にさせる -->
+                        <meta name="apple-mobile-web-app-capable" content="yes">
+                            
+                            <title>TORIMOTSU</title>
+                            <meta charset="utf-8" />
+                            
+                            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                            <!-- CSS の定義 -->
+                            <style>
+      
+      
+                                /* ボタンの書式*/
+                                    .btn{
+                                        background:#deb887;
+                                        color:#808080;
+                                        font:"游ゴシック";
+                                      
+                                      
+                                    }
+                                    
+                                    /* 書式*/
+                                    .settei{
+                                        margin:10px 30px 0px 30px;
+                                        color:#A59d9d;
+                                        font:"游ゴシック";
+                                        
+                                        }
+                                /*icon*/
+                                
+                                .button_icon{
+                                     width:14%;
+                                 
+                                 }
+                                
+                                .navbar{
+                                     background-color:#deb887;
+                                 }
+                                 
+                                 
+                                 body{
+                                     background-color:#ffe8d1;
+                                 }
+                            
+                            .resizeimage img {
+                                 width: 30%;
+                                  }
+                             /*  文字の色を指定 */
+                            .fontBlue {
+                              color: blue;
+                            }
+                            .fontRed {
+                              color: red;
+                            }
+                            </style>
+                        　　<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+                           
+                           <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+                            
+                            
+                            
+                            
+    </head>
+    <body>
+        
+      <https://getbootstrap.jp/docs/4.5/components/navbar/ -->
+      <nav class="navbar">
+        
+        <span >
+        
+            
+       <img src="picture/haguruma.png" class="button_icon" id="id_change">
+       <img src="picture/logout.png" class="button_icon" id="logout">
+      </span>
+      </nav>
+                <div class="settei">
+                    <h3>お店提案</h3>
+
+                
+                <table class="table"id="table" border="1">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>店舗名</th>
+                        <th>URL</th></tr>
+                    </thread>
+                </table>
+            <div id=disp></div>
+            </div>
+                <div>
+                    <h3 id=ERROR_MESSAGE></h3>                    
+                </div>
+                <br>
+                </br>
+                
+
+
+
+                
+                <button type="button" class="btn btn-lg btn-block" id="return">スタート画面に戻る</button>
+     
+                </div>
+                
+                <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+                    <img src="https://api.gnavi.co.jp/api/img/credit/api_155_20.gif" width="155" height="20" border="0" alt="グルメ情報検索サイト　ぐるなび">
+                </a>
+                
+                
+                <script>
+  const error_hap=function(){
+      //エラー時の処理
+        $("#ERROR_MESSAGE").append(`どうやら近くにいいお店がないみたいです…<br>ごめんなさい`)
+  }
+  const showResult = result => {
+   result.rest.map( item => {
+        $("#table").append(`<tr><td>${item.name}</td><td><a href=${item.url}>${item.name}</a></td></tr>`)
+    })
+      }
+
+firebase.auth().onAuthStateChanged( (user) => {
+  let db = firebase.firestore(); // データベースに関する機能の取得
+//  var user = firebase.auth().currentUser;
+  var docRoomid = db.collection("Room_Member").where("room_member","==",user.uid).orderBy("create_at","desc").limit(1);
+
+  docRoomid
+  .get()
+  .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          room_id=doc.data().room_id;
+          var Answer = db.collection("Answer_Total").doc(String(room_id));
+          Answer.get().then(function(doc) {
+          $( function () {
+                            let Ans=doc.data();
+                            let latitude_1  = Ans.latitude;
+                            let longitude_1 = Ans.longitude;
+                            console.log(latitude_1);
+                            console.log(longitude_1);
+                            console.log(doc.data());
+                            
+                            var bottomless_cup=0;
+                            var keywords="";
+//-----------------------上位3つの答え以外を無効化-----------------------------------------
+                            var Ans_array=[Ans.q_1,Ans.q_2,Ans.q_3,Ans.q_4/2,Ans.q_5/2];
+                            var max_1=0;
+                            var max_2=0;
+                            var max_3=0;
+                            var rank_1=0;
+                            var rank_2=0;
+                            var rank_3=0;
+                            for(let step=0;step<5;step++){
+                                if(max_1<Math.abs(Ans_array[step])){
+                                    rank_3=rank_2;
+                                    rank_2=rank_1;
+                                    rank_1=step;
+                                    max_3=max_2;
+                                    max_2=max_1;
+                                    max_1=Math.abs(Ans_array[step]);
+                                }else if(max_2<Math.abs(Ans_array[step])){
+                                    rank_3=rank_2;
+                                    rank_2=step;
+                                    max_3=max_2;
+                                    max_2=Math.abs(Ans_array[step]);
+                                }else if(max_3<Math.abs(Ans_array[step])){
+                                    rank_3=step;
+                                    max_3=Math.abs(Ans_array[step]);
+                                }
+                            }
+                            for(let step=0;step<5;step++){
+                                console.log(step," : ",step!=rank_1&&step!=rank_2&&step!=rank_3);
+                                if(step!=rank_1&&step!=rank_2&&step!=rank_3){
+                                    Ans_array[step]=0;
+                                }
+                            }
+                            console.log(Ans_array);
+//-----------------------回答をもとにキーワードを設定-----------------------------------------
+                            if(Ans.q_4==10) bottomless_cup=1;
+                            if(2.5<=Ans_array[3]){keywords=keywords+",酒";}
+                            if(2<=Ans_array[0]){
+                                keywords=keywords+",洋食";
+                                if(2.5<Ans_array[4]){keywords=keywords+",パスタ";}
+                            }else if(Ans_array[0]<=-2){
+                                keywords=keywords+",和食";
+                                if(2.5<Ans_array[4]){keywords=keywords+",麺";}
+                            }else{
+                                if(2.5<Ans_array[4]){keywords=keywords+",麺";}
+                            }
+                            if(2<=Ans_array[1]){
+                                keywords=keywords+",がっつり";
+                            }else if(Ans_array[1]<=-2){
+                                keywords=keywords+",ヘルシー";
+                            }
+                            if(2<=Ans_array[2]){
+                                keywords=keywords+",肉";
+                            }else if(Ans_array[2]<=-2){
+                                keywords=keywords+",魚";
+                            }
+                            if(keywords==""){keywords="定食";}
+//-----------------------------------------------------------------------
+                            console.log("使用キーワード：",keywords);
+
+                            const url = "https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=b89c792746c0db2e8931a7c0eb014292"
+                              const params = {
+                                  keyid: "",
+                                  latitude: latitude_1,
+                                  longitude: longitude_1,
+                                  range: 3,
+                                  freeword:keywords,
+                                  freeword_condition:1,
+                                  bottomless_cup:bottomless_cup,
+                                  hit_per_page:5
+                              }
+                              params.keyid = $("#key").val()
+                              $.getJSON( url, params)
+                              .done(function(result){
+                                  showResult( result );
+                              })
+                              .fail(function(){
+                                  error_hap();
+                              });
+                                  
+                        
+                        
+
+              
+                              
+
+                          })
+                        }).catch(function(error) {
+                        console.log("Error getting document:", error);
+                        });
+                  
+              });
+  })
+  .catch(function(error) {
+      console.log("Error getting documents: ", error);
+  });
+
+})
+
+                </script>
+               
+                    
+                    
+                   
+               <script>
+      
+      
+                const logout_btn = document.getElementById("logout");
+                
+                const return_btn = document.getElementById("return");
+                const id_change_btn= document.getElementById("id_change");
+                
+                 firebase.auth().onAuthStateChanged( (user) => {
+                  if(!user) {
+                 window.location.replace("login.html");
+                   }
+                });
+                
+                logout_btn.addEventListener("click", ()=>{
+                  firebase.auth().signOut().then(()=>{
+                    window.location.replace("login.html");
+                  })
+                  .catch( (error)=>{
+                    alert(`ログアウト時にエラーが発生しました (${error})`);
+                  });
+                });
+                
+                  id_change_btn.addEventListener("click", ()=>{
+                      window.location.replace("userinit.html");
+                               
+                        });
+                   
+                  
+                    return_btn.addEventListener("click", ()=>{
+                     window.location.replace("start.html");
+                       });
+                  
+                  </script>
+                </body>
+</html>

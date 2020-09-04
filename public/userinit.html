@@ -30,214 +30,273 @@
   <!-- iOS のブラウザを全画面表示にさせる -->
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <title>Snippet Tool</title>
+  <title>TORIMOTSU USER SETTING</title>
 
   <!-- CSS の定義 -->
   <style>
-   /*  文字の色を指定 */
-  .fontBlue {
-    color: blue;
-  }  
-  .fontRed {
-    color: red;
-  }  
-  </style>
+      
+    /* ボタンの書式*/
+   .btn{
+       background:#deb887;
+       color:#808080;
+       font:"游ゴシック";
+     
+     
+   }
+   
+   /* 書式*/
+   .settei{
+       margin:5px 30px 0px 30px;
+       color:#A59d9d;
+       font:"游ゴシック";
+       
+       }
+/*icon*/
+
+.button_icon{
+    width:14%;
+
+}
+
+.navbar{
+    background-color:#deb887;
+}
+
+
+body{
+    background-color:#ffe8d1;
+}
+
+/*  文字の色を指定 */
+.fontBlue {
+ color: blue;
+}
+.fontRed {
+ color: red;
+}
+</style>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 </head>
 <body>
 <!-- ナビゲーションバーの配置。参考https://getbootstrap.jp/docs/4.5/components/navbar/ -->
- <nav class="navbar navbar-dark bg-primary">
-   <span class="navbar-brand mb-0 h1">個人情報設定</span>
-   <button type="button" class="btn btn-primary" id="logout">ログアウト</button>
- </nav>
- 
-<!--個人情報フォーム-->
-  <form>
-  <div class="form-row">
-    <label class="col-sm-3 col-form-label">・お名前
-    </label>
-    <div class="col-sm-9">
-        <p>
-            <input type="text" id="name" autocomplete="name" class="form-control" placeholder="お名前"/>
-        </p>
-    </div>
-  </div>
+<nav class="navbar">
+       
+  <span >
+  
       
-  <div class="form-row">
-    <label class="col-sm-3 col-form-label">・生年月日</label>
-​
-    <div class="col-sm-9">
-​
-      <select class="custom-select w-25" title="生年月日(西暦)" id="bday-year" autocomplete="bday-year">
-        <option selected="">----</option>
-        <option value="2010">2010</option>
-        <option value="2009">2009</option>
-        <option value="2008">2008</option>
-        <option value="2007">2007</option>
-        <option value="2006">2006</option>
-        <option value="2005">2005</option>
-        <option value="2004">2004</option>
-        <option value="2003">2003</option>
-        <option value="2002">2002</option>
-        <option value="2001">2001</option>
-        <option value="2000">2000</option>
-        <option value="1999">1999</option>
-        <option value="1998">1998</option>
-        <option value="1997">1997</option>
-        <option value="1996">1996</option>
-        <option value="1995">1995</option>
-        <option value="1994">1994</option>
-        <option value="1993">1993</option>
-        <option value="1992">1992</option>
-        <option value="1991">1991</option>
-        <option value="1990">1990</option>
-        <option value="1989">1989</option>
-        <option value="1988">1988</option>
-        <option value="1987">1987</option>
-        <option value="1986">1986</option>
-        <option value="1985">1985</option>
-        <option value="1984">1984</option>
-        <option value="1983">1983</option>
-        <option value="1982">1982</option>
-        <option value="1981">1981</option>
-        <option value="1980">1980</option>
-        <option value="1979">1979</option>
-        <option value="1978">1978</option>
-        <option value="1977">1977</option>
-        <option value="1976">1976</option>
-        <option value="1975">1975</option>
-        <option value="1974">1974</option>
-        <option value="1973">1973</option>
-        <option value="1972">1972</option>
-        <option value="1971">1971</option>
-        <option value="1970">1970</option>
-        <option value="1969">1969</option>
-        <option value="1968">1968</option>
-        <option value="1967">1967</option>
-        <option value="1966">1966</option>
-        <option value="1965">1965</option>
-        <option value="1964">1964</option>
-        <option value="1963">1963</option>
-        <option value="1962">1962</option>
-        <option value="1961">1961</option>
-        <option value="1960">1960</option>
-        <option value="1959">1959</option>
-        <option value="1958">1958</option>
-        <option value="1957">1957</option>
-        <option value="1956">1956</option>
-        <option value="1955">1955</option>
-        <option value="1954">1954</option>
-        <option value="1953">1953</option>
-        <option value="1952">1952</option>
-        <option value="1951">1951</option>
-        <option value="1950">1950</option>
-      </select>
-      年
-      <select class="custom-select w-25" title="生年月日(月)" id="bday-month" autocomplete="bday-month">
-        <option selected="">--</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-      </select>
-      月
-      <select class="custom-select w-25" title="生年月日(日)" id="bday-day" autocomplete="bday-day">
-        <option selected="">--</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-        <option value="31">31</option>
-      </select>
-      日
-    </div>
-​
-  </div>
-  
-  
-  <div class="form-row">
-  <label class="col-sm-3 col-form-label">・性別</label>
-         <div class="col-sm-9">
-             <select class="custom-select w-25" title="性別" id="sex" >
-                <option value="0">女</option>
-                <option value="1">男</option>
-             </select>
-         </div>
-   </div>
-  
-  
-  
-  <div class="form-row">
-  <label class="col-sm-3 col-form-label">・GPS情報</label>
-        <div class="col-sm-9">
-            <select class="custom-select w-25" title="位置情報" id="GPS" >
-               <option value="0">許可</option>
-            　　<option value="1">許可しない</option></select>
-        </div>
-  </div>
-  
-  
-  
-   
-  <div class="container">
-      <div class="row mx-auto">
-          <div class="col">
-              <form class="form-inline">
-​
-                  <button type="button" class="btn btn-primary btn-lg btn-block" id="fin_id">登録</button>
-​
-                 
-            </form>
-        </div>
-      </div>
-  </div>
-  
-  <script>
+ <img src="picture/haguruma.png" class="button_icon" id="id_change">
+ <img src="picture/logout.png" class="button_icon" id="logout">
+</span>
+</nav>
+ 
+<div class="settei">
+  <h3>個人情報設定</h3>
+<!--個人情報フォーム-->
+<form>
+<div class="form-row">
+<label class="col-sm-3 col-form-label">お名前
+</label>
+<div class="col-sm-9">
+<p>
+<input type="text" id="name" autocomplete="name" class="form-control" placeholder="お名前">
+</p>
+</div>
+</div>
 
+<div class="form-row">
+<label class="col-sm-3 col-form-label">生年月日</label>
+​
+<div class="col-sm-9">
+​
+<select class="custom-select w-25" title="生年月日(西暦)" id="bday-year" autocomplete="bday-year">
+<option selected="">----</option>
+<option value="2010">2010</option>
+<option value="2009">2009</option>
+<option value="2008">2008</option>
+<option value="2007">2007</option>
+<option value="2006">2006</option>
+<option value="2005">2005</option>
+<option value="2004">2004</option>
+<option value="2003">2003</option>
+<option value="2002">2002</option>
+<option value="2001">2001</option>
+<option value="2000">2000</option>
+<option value="1999">1999</option>
+<option value="1998">1998</option>
+<option value="1997">1997</option>
+<option value="1996">1996</option>
+<option value="1995">1995</option>
+<option value="1994">1994</option>
+<option value="1993">1993</option>
+<option value="1992">1992</option>
+<option value="1991">1991</option>
+<option value="1990">1990</option>
+<option value="1989">1989</option>
+<option value="1988">1988</option>
+<option value="1987">1987</option>
+<option value="1986">1986</option>
+<option value="1985">1985</option>
+<option value="1984">1984</option>
+<option value="1983">1983</option>
+<option value="1982">1982</option>
+<option value="1981">1981</option>
+<option value="1980">1980</option>
+<option value="1979">1979</option>
+<option value="1978">1978</option>
+<option value="1977">1977</option>
+<option value="1976">1976</option>
+<option value="1975">1975</option>
+<option value="1974">1974</option>
+<option value="1973">1973</option>
+<option value="1972">1972</option>
+<option value="1971">1971</option>
+<option value="1970">1970</option>
+<option value="1969">1969</option>
+<option value="1968">1968</option>
+<option value="1967">1967</option>
+<option value="1966">1966</option>
+<option value="1965">1965</option>
+<option value="1964">1964</option>
+<option value="1963">1963</option>
+<option value="1962">1962</option>
+<option value="1961">1961</option>
+<option value="1960">1960</option>
+<option value="1959">1959</option>
+<option value="1958">1958</option>
+<option value="1957">1957</option>
+<option value="1956">1956</option>
+<option value="1955">1955</option>
+<option value="1954">1954</option>
+<option value="1953">1953</option>
+<option value="1952">1952</option>
+<option value="1951">1951</option>
+<option value="1950">1950</option>
+</select>
+年
+<select class="custom-select w-25" title="生年月日(月)" id="bday-month" autocomplete="bday-month">
+<option selected="">--</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+</select>
+月
+<select class="custom-select w-25" title="生年月日(日)" id="bday-day" autocomplete="bday-day">
+<option selected="">--</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>
+日
+</div>
+​
+</div>
+
+
+<div class="form-row">
+<label class="col-sm-3 col-form-label">性別</label>
+<div class="col-sm-9">
+ <select class="custom-select w-25" title="性別" id="sex" >
+    <option value="0">女</option>
+    <option value="1">男</option>
+ </select>
+</div>
+</div>
+
+
+
+<div class="form-row">
+<label class="col-sm-3 col-form-label">GPS情報</label>
+<div class="col-sm-9">
+<select class="custom-select w-25" title="位置情報" id="GPS" >
+   <option value="0">許可</option>
+　　<option value="1">許可しない</option></select>
+</div>
+</div>
+
+
+
+
+​
+      <button type="button" class="btn btn-lg btn-block" id="fin_id">登録</button>
+​
+
+
+</div>
+
+
+  <script>
+firebase.auth().onAuthStateChanged( (user) => {
+  if(!user) {
+ window.location.replace("login.html");
+   }
+   let db = firebase.firestore(); // データベースに関する機能の取得
+   const doc = db.collection("Users").doc(user.uid);
+   doc.get().then(function(doc) {
+    if (doc.exists) {
+      const user_data = doc.data();
+      document.getElementById( "name" ).value=user_data.name;
+      checkSelect(document.getElementById("bday-year"),user_data.b_year);
+      checkSelect(document.getElementById("bday-month"),user_data.b_month);
+      checkSelect(document.getElementById("bday-day"),user_data.b_day);
+      checkSelect(document.getElementById("sex"),user_data.gender);
+      checkSelect(document.getElementById("GPS"),user_data.GPS);
+
+      console.log("Document data:", doc.data());
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+   });
 // userを追加する
 function add(){
   let userNameForAdd = $("#name").val(); // inputbox に入力された値を取得する
-  let userGenderForAdd = $("#sex").val(); // inputbox に入力された値を取得する
-  let userBirthyearForAdd = $("#bday-year").val(); // inputbox に入力された値を取得する
-  let userBirthmonthForAdd = $("#bday-month").val(); // inputbox に入力された値を取得する
-  let userBirthdayForAdd = $("#bday-day").val(); // inputbox に入力された値を取得する
-  let userGPSForAdd = $("#GPS").val(); // inputbox に入力された値を取得する
-  
+  let userGenderForAdd = $("#sex").val(); 
+  let userBirthyearForAdd = $("#bday-year").val(); 
+  let userBirthmonthForAdd = $("#bday-month").val(); 
+  let userBirthdayForAdd = $("#bday-day").val(); 
+  let userGPSForAdd = $("#GPS").val(); 
+
   var user = firebase.auth().currentUser;
 
   db.collection("Users").doc(user.uid).set({ // データベースにユーザーを追加する
@@ -250,7 +309,8 @@ function add(){
       GPS:userGPSForAdd,
       create_at: new Date() // 現在時刻
   }).then(function() { // 成功した場合に実行される箇所
-      window.location.replace("index.html");
+//    history.back();
+     window.location.replace("start.html");
   })
   .catch(function(error) { // 失敗した場合に実行される箇所
       console.error("Error adding document: ", error);
@@ -276,10 +336,16 @@ logout_btn.addEventListener("click", ()=>{
     alert(`ログアウト時にエラーが発生しました (${error})`);
   });
 });
+   fin_id_btn.addEventListener("click", ()=>{add();});
 
-
-   fin_id_btn.addEventListener("click", ()=>{
-     add();});
+function checkSelect(obj,val){
+for(var i=0;i<obj.length;i++){
+if(obj[i].value==val){
+obj[i].selected=true;
+break;
+}
+}
+}
 
  </script>
 </body>

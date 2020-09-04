@@ -1,0 +1,276 @@
+<!--へや🆔が決まっていなければ、このページには飛べないように -->
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Bootstrap の css をインポートする。参考 https://getbootstrap.jp/docs/4.5/getting-started/introduction/　-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- モバイルブラウザでのレイアウトを制御する。参考 https://qiita.com/ryounagaoka/items/045b2808a5ed43f96607 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <!-- 検索エンジンに引っかからないようにする。参考 https://ameblo.jp/masa30201/entry-11564231810.html -->
+  <meta name="Keywords" content="norobot">
+
+  <!--  -->
+  <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+
+  <script defer src="/__/firebase/init.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
+  <script src="/config.js"></script>
+  <script src="/lunch_room.js"></script>
+  <!-- jQuery, Bootstrap の JSライブラリ をロードする。参考 https://getbootstrap.jp/docs/4.5/getting-started/introduction/ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <!-- android のブラウザを全画面表示にさせる -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- iOS のブラウザを全画面表示にさせる -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>TORIMOTSU QUESTION</title>
+
+  <!-- CSS の定義 -->
+  <style>
+    input[type="range"] {
+     -webkit-appearance: none; /* 🚩これ無しだとスタイルがほぼ全く反映されないので注意 */
+     appearance: none;
+     cursor: pointer; /* カーソルを分かりやすく */
+     outline: none; /* スライダーのアウトラインは見た目がキツイので消す */
+     height: 14px; /* バーの高さ */
+     width: 50%; /* バーの幅 */
+     background: #deb887;  /* バーの背景色 */
+     border-radius: 10px; /* バーの両端の丸み */
+     border: solid 3px #deb887;  /* バー周囲の線 */
+   }
+   /* WebKit向けのつまみ */
+   input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none; /*  🚩デフォルトのつまみのスタイルを解除 */
+     background: #808080; /* 背景色 */
+     width: 20px; /* 幅 */
+     height: 20px; /* 高さ */
+     border-radius: 50%; /* 円形に */
+     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+   }
+   /* Moz向けのつまみ */
+   input[type="range"]::-moz-range-thumb {
+     background: #808080; /* 背景色 */
+     width: 20px; /* 幅 */
+     height: 20px; /* 高さ */
+     border-radius: 50%; /* 円形に */
+     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+     border: none; /* デフォルトの線を消す */
+   }
+   /* Firefoxで点線が周りに表示されてしまう問題の解消 */
+   input[type="range"]::-moz-focus-outer {
+     border: 0;
+   }
+   /* つまみをドラッグしているときのスタイル */
+   input[type="range"]:active::-webkit-slider-thumb {
+     box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+   }
+   
+   
+   
+   
+      /* ボタンの書式*/
+              .btn{
+                  background:#deb887;
+                  color:#808080;
+                  font:"游ゴシック";
+                
+                
+              }
+              
+              /* 書式*/
+              .settei{
+                  margin:10px 15px 0px 15px;
+                  color:#A59d9d;
+                  font:"游ゴシック";
+                  
+                  }
+          /*icon*/
+          
+          .button_icon{
+               width:14%;
+           
+           }
+          
+          .navbar{
+               background-color:#deb887;
+           }
+           
+           
+           body{
+               background-color:#ffe8d1;
+           }
+      
+   
+      /*  文字の色を指定 */
+     .fontBlue {
+       color: blue;
+     }
+     .fontRed {
+       color: red;
+     }
+     </style>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+</head>
+<body>
+<https://getbootstrap.jp/docs/4.5/components/navbar>
+<nav class="navbar">
+         
+  <span >
+       
+ <img src="picture/haguruma.png" class="button_icon" id="id_change">
+ <img src="picture/logout.png" class="button_icon" id="logout">
+</span>
+</nav>
+ 
+<!--食事会ルームに入手つするための情報を記録するフォーム-->
+ 
+<div class="settei">
+  <h3>気分を入力</h3>
+  
+  <p></p>
+  
+  <div align="center">
+      
+      <div class="form-row">
+          <div class="col-md-4 mb-3">
+              
+              和食　<input type="range" id="lunch_type" min="-5" max="5" value=0 >　洋食
+           
+                  </div>
+      </div>
+      
+        
+      
+      
+      <div class="form-row">
+          <div class="col-md-4 mb-3">
+              
+              
+              
+            ヘルシー　<input type="range"  id="lunch_volume" min="-5" max="5" value=0 > がっつり
+                  </div>
+          
+          
+          
+      </div>
+      
+      <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        
+                        
+                        
+                        お魚　<input type="range"  id="lunch_main" min="-5" max="5" value=0 >　お肉
+                    </div>
+                    
+                    
+                    
+                </div>
+      
+      <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        
+                        
+                        
+                        お酒×　<input type="range"  id="alcohol" min="0" max="10" value=0 >　 お酒○
+                            </div>
+                    
+                    
+                    
+                </div>
+      
+      <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        
+                        
+                        
+                         麺類× 　<input type="range"  id="noodle" min="0" max="10" value=0 >　麺類○                              </div>
+                    
+                    
+                    
+                </div>
+   
+  </div>
+
+
+   <br></br>
+
+
+         <form class="form-inline">
+​
+             <button type="button" class="btn  btn-lg btn-block" id="next">次へ</button>
+​
+   </form>
+
+
+<p>
+</p>
+
+            <form class="form-inline">
+​
+                <button type="button" class="btn btn-lg btn-block" id="return">戻る</button>
+​
+               
+     </form>
+
+     
+</div>
+  <script>
+      
+    
+
+    // アンケート結果を取得
+
+
+const logout_btn = document.getElementById("logout");
+const next_btn = document.getElementById("next");
+const return_btn = document.getElementById("return");
+const id_change_btn= document.getElementById("id_change");
+
+let db = firebase.firestore(); // データベースに関する機能の取得
+
+ firebase.auth().onAuthStateChanged( (user) => {
+  if(!user) {
+ window.location.replace("login.html");
+   }
+});
+
+logout_btn.addEventListener("click", ()=>{
+  firebase.auth().signOut().then(()=>{
+    window.location.replace("login.html");
+  })
+  .catch( (error)=>{
+    alert(`ログアウト時にエラーが発生しました (${error})`);
+  });
+});
+
+id_change_btn.addEventListener("click", ()=>{
+                      window.location.replace("userinit.html");
+                               
+                        });
+  
+
+  next_btn.addEventListener("click", ()=>{
+    Answer_add();
+   });
+  
+  return_btn.addEventListener("click", ()=>{
+      window.location.replace("start.html");
+        });
+  
+  </script>
+  
+<!-- 選択ボタンの値の取得方法https://itsakura.com/js-checkbox#s1を参照-->
+  
+  
+</body>
+</html>

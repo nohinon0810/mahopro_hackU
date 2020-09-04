@@ -9,29 +9,29 @@
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 </head>
 <body>
-  <h1>Hello Firebase Auth</h1>
+  <h1>Hello TORIMOTSU</h1>
   <div id="firebaseui-auth-container"></div>
 
-  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth__ja.js"></script>
   <script src="./config.js"></script>
   <script>
     //----------------------------------------------
-    // Firebase UI‚Ìİ’è
+    // Firebase UIï¿½Ìİ’ï¿½
     //----------------------------------------------
     var uiConfig = {
-        // ƒƒOƒCƒ“Š®—¹‚ÌƒŠƒ_ƒCƒŒƒNƒgæ
+        // ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½_ï¿½Cï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½
         signInSuccessUrl: '/index.html',
 
-        // —˜—p‚·‚é”FØ‹@”\
+        // ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½Fï¿½Ø‹@ï¿½\
         signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID  //ƒ[ƒ‹”FØ
+          firebase.auth.EmailAuthProvider.PROVIDER_ID  //ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Fï¿½ï¿½
         ],
 
-        // —˜—p‹K–ñ‚ÌURL(”CˆÓ‚Åİ’è)
+        // ï¿½ï¿½ï¿½pï¿½Kï¿½ï¿½ï¿½URL(ï¿½Cï¿½Ó‚Åİ’ï¿½)
         tosUrl: 'http://example.com/kiyaku/',
-        // ƒvƒ‰ƒCƒoƒV[ƒ|ƒŠƒV[‚ÌURL(”CˆÓ‚Åİ’è)
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½oï¿½Vï¿½[ï¿½|ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½URL(ï¿½Cï¿½Ó‚Åİ’ï¿½)
         privacyPolicyUrl: 'http://example.com/privacy'
       };
 
